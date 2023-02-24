@@ -8,12 +8,23 @@ class Solution {
         for(int i = 0; i < s.length(); i++) {
             char a = s.charAt(i);
             
-            if(a == '(' || a == '{' || a == '[') openBrackets.push(a);
-            else if(openBrackets.empty()) return false;
-            else if(a == ')' && openBrackets.pop() != '(') return false;
-            else if(a == '}' && openBrackets.pop() != '{') return false;
-            else if(a == ']' && openBrackets.pop() != '[') return false;
+            switch(a) {
+                case '(':
+                case '{':
+                case '[':
+                    openBrackets.push(a);
+                    break;
+                case ')':
+                    if(openBrackets.isEmpty() || openBrackets.pop() != '(') return false;
+                    break;
+                case '}':
+                    if(openBrackets.isEmpty() || openBrackets.pop() != '{') return false;
+                    break;
+                case ']':
+                    if(openBrackets.isEmpty() || openBrackets.pop() != '[') return false;
+                    break;
+            }
         }
-        return openBrackets.empty();
+        return openBrackets.isEmpty();
     }
 }
