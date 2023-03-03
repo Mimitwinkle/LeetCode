@@ -1,19 +1,22 @@
 class Solution {
     public boolean isPalindrome(String s) {
         
-        if(s.isEmpty()) return true;
+        // pointer a will move from beginning, pointer b will move from end
+        // compare a & b intill they equal the same or b < a
         
-        String backwardS = "";
+        if (s.length() == 1) return true;
         
-        s = s.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
-
-        int i = 0;
-        int j = s.length() - 1;
+        int a = 0;
+        int b = s.length() - 1;
         
-        while(i < j) {
-            if(s.charAt(i) != s.charAt(j)) return false;
-            i++;
-            j--;
+        while(a < b) {
+            if(!Character.isLetterOrDigit(s.charAt(a))) a++;
+            else if(!Character.isLetterOrDigit(s.charAt(b))) b--;
+            else {
+                if(a<b && Character.toLowerCase(s.charAt(a)) != Character.toLowerCase(s.charAt(b))) return false;
+            a++;
+            b--;
+            }
         }
         return true;
     }
